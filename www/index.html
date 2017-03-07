@@ -68,7 +68,7 @@
                 <div class="navbar">
                     <div class="navbar-inner">
                         <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                        <div class="center sliding app_title">今日運程</div>
+                        <div class="center sliding app_title">Money Count</div>
 
                         <div class="right">
 
@@ -93,14 +93,44 @@
 								<!-- Text inputs -->
 									<li>
 									  <div class="item-content">
-										<div class="item-media"><i class="icon f7-icons">person</i></div>
+										<div class="item-media"><i class="icon f7-icons">money_dollar</i></div>
 										<div class="item-inner">
-										  <div class="item-title label">Amount</div>
+										  <div class="item-title label">Input Amount</div>
 										  <div class="item-input">
-											<input type="email">
+											<input type="number" placeholder="Amount" class="moneyNum">
 										  </div> 
 										</div>
 									  </div>
+									</li>
+									<li>
+									  <div class="item-content">
+										<div class="item-media"><i class="icon f7-icons">person</i></div>
+										<div class="item-inner">
+										  <div class="item-title label">People</div>
+										  <div class="item-input">
+											<div class="range-slider">
+											  <input type="range" min="0" max="20" value="3" step="1" class="personNum">
+											</div>
+										  </div>
+										</div>
+									  </div>
+									</li>
+									
+
+								</ul>
+
+							</div>	
+							
+							<div class="list-block">
+								<ul>
+									<li class="item-content">
+										<div class="item-media">
+											<i class="icon f7-icons">money_dollar</i>
+										</div>
+										<div class="item-inner">
+											<div class="item-title">Dollor Per People</div>
+											<div class="item-after dollorPerPeopleResult"></div>
+										</div>
 									</li>
 								</ul>
 
@@ -245,81 +275,11 @@
                 } else {
                     lang = "en";
                 }
-                if(lang=="tc"){
-                  $(".langen").removeClass("button-fill");
-                  $(".langtc").addClass("button-fill");
-                  $(".langsc").removeClass("button-fill");
-                }else if(lang=="sc"){
-                  $(".langen").removeClass("button-fill");
-                  $(".langtc").removeClass("button-fill");
-                  $(".langsc").addClass("button-fill");
-                }else{
-                  $(".langen").addClass("button-fill");
-                  $(".langtc").removeClass("button-fill");
-                  $(".langsc").removeClass("button-fill");
-                }
+ 
                 pageInit();
 
-                $("[name=twelveConstellations]").bind("change", function() {
-                    //debugger;
-                    $.ajax({
-                        type: "post",
-                        url: "http://app.data.qq.com/?umod=astro&act=astro&jsonp=1&func=TodatTpl&t=4",
-                        data: {
-                            "a": $("[name=twelveConstellations] :selected").val(),
-                            "y": moment().format('YYYY'),
-                            "m": moment().format('M'),
-                            "d": moment().format('D')
-                        },
-                        dataType: "jsonp",
-                        jsonp: "callback", //传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
-                        jsonpCallback: "TodatTpl", //自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-                        success: function(response) {
-                            //console.log(response); console.log(response.fortune);
-                            $(".icon-back").trigger("click");
-                            $(response.fortune).each(function(index, content) {
-                                if (lang == "en") {
-                                    //console.log("en");  debugger;
-                                    if (index == "5" || index == 7 || index == 8) {
-
-                                        translate(content.content, "en", function(response) {
-
-                                            $(".twelveConstellations_eq" + index + "_result").html(response.data.translations[0].translatedText);
-                                            //    return;
-                                        })
-                                    } else {
-                                        $(".twelveConstellations_eq" + index + "_result").html(content.content);
-                                    }
-
-                                } else if (lang == "tc") {
-                                    console.log("tc");
-                                    $(".twelveConstellations_eq" + index + "_result").html(toCode(content.content, 1));
-                                } else {
-                                    console.log("sc");
-                                    $(".twelveConstellations_eq" + index + "_result").html(toCode(content.content, 0));
-                                }
-
-                            })
-                            storageManager.setCookie({"twelveConstellations_name": $("[name=twelveConstellations] :selected").html(), "twelveConstellations_val": $("[name=twelveConstellations] :selected").val()})
-                            cookie = storageManager.getCookie();
-                            console.log(cookie.twelveConstellations_val);
-
-                        }
-                    });
-                })
-
-                $(".twelveConstellationsDetail").bind("click", function(e) {
-                    e.preventDefault();
-
-                    if (lang == "en") {
-
-                        mainView.router.loadPage('intro/en/twelveConstellationsDetail_' + cookie.twelveConstellations_val + '.html')
-                    } else if (lang == "sc") {
-                        mainView.router.loadPage('intro/sc/twelveConstellationsDetail_' + cookie.twelveConstellations_val + '.html')
-                    } else {
-                        mainView.router.loadPage('intro/sc/twelveConstellationsDetail_' + cookie.twelveConstellations_val + '.html')
-                    }
-                })
+     
+  
 
                 $(".langen").bind("click", function() {
                     lang = "en";
@@ -354,6 +314,16 @@
                     window.open(url, target, options);
 
                 })
+				
+				$(".moneyNum").bind("change",function(){
+					var dollorPerPeopleResult = parseInt($(".moneyNum").val()) / parseInt($(".personNum").val())
+					$(".dollorPerPeopleResult").html(dollorPerPeopleResult);
+				})
+				
+				$(".personNum").bind("change",function(){
+					var dollorPerPeopleResult = parseInt($(".moneyNum").val()) / parseInt($(".personNum").val())
+					$(".dollorPerPeopleResult").html(dollorPerPeopleResult);
+				})
             })
 
             function translate(keyword, lang, callback) {
@@ -377,35 +347,7 @@
             }
 
             function pageInit() {
-
-                $.each(twelveConstellationsItemName[lang], function(index, content) {
-                    $(".twelveConstellations_eq" + index + "_title").html(content);
-                });
-
-                $("#twelveConstellations option").each(function(index, content) {
-                    $(this).html(twelveConstellationsName[lang][index]);
-                })
-
-                $(".twelveConstellationsTitle").html(twelveConstellationsTitle[lang]);
-                $(".twelveConstellationsDetail").html(introductionBtn[lang]);
-
-                var cookie = storageManager.getCookie();
-
-                if (cookie == "" || cookie == null) {
-                    storageManager.setCookie({"twelveConstellations_name": $("[name=twelveConstellations] option").eq(0).html(), "twelveConstellations_val": $("[name=twelveConstellations] option").eq(0).val()})
-                    cookie = storageManager.getCookie();
-                }
-
-                $("[name=twelveConstellations]").val(cookie.twelveConstellations_val);
-                //  debugger;
-                $(".selectedTwelveConstellations_name").html($("[name=twelveConstellations] :selected").html());
-
-                setTimeout(function() {
-                    $("[name=twelveConstellations]").trigger("change")
-                }, 100);
-
-                $(".app_title").html(titleName[lang] + " (" + moment().format('MMMM D, YYYY') + ")");
-
+				$(".moneyNum").trigger("change");
             }
 
             myApp.onPageInit('twelveConstellationsDetail', function(page) {

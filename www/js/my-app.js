@@ -17,9 +17,9 @@ $$(document).on('deviceready', function() {
 
    // Set AdMobAds options:
   admob.setOptions({
-	publisherId:          "ca-app-pub-3715336230214756/3466501023",  // Required
-	interstitialAdId:     "ca-app-pub-3715336230214756/4943234225",  // Optional
-	tappxIdAndroid:       "/120940746/Pub-15267-Android-0348",        // Optional
+	publisherId:          "ca-app-pub-3715336230214756/3022189029",  // Required
+	interstitialAdId:     "ca-app-pub-3715336230214756/4498922227",  // Optional
+	tappxIdAndroid:       "/120940746/Pub-15334-Android-4151",        // Optional
 	tappxShare:           0.1,
 	isTesting: false, // receiving test ads (do not test with real ads as your account will be banned)				// Optional
 	bannerAtTop: false, // set to true, to put banner at top
