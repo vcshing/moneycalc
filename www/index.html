@@ -89,6 +89,10 @@
                         <!-- Scrollable page content -->
 					
                         <div class="page-content">
+						  <p class="buttons-row">
+                            <a href="#" class="button langDefault word">Default Language</a>
+                            <a href="#" class="button langen">English</a>
+                          </p>
 							<div class="content-block-title word wordPaymentDetails">Payment Details</div>
 							<div class="list-block">
 								<ul>
@@ -201,38 +205,24 @@
 			var	defaultLangArr = {
 				0 	:	"Other Apps",
 				1	:	"Checkout Money Count",
-				2	:	"Payment Details",
-				3	:	"Amounts",
+				2	:	"Default Language",
+				3	:	"Payment Details",
 				4	:	"Amounts",
-				5	:	"People number",
-				6	:	"People number",
-				7	:	"Payment Details",
-				8	:	"Payment Per Person",
-				9	:	"Personal Return",
-				10	:	"Your Payment Money",
+				5	:	"Amounts",
+				6	:	"Numbers of People",
+				7	:	"Numbers of People ",
+				8	:	"Payment Details",
+				9	:	"Payment Per Person",
+				10	:	"Personal Returns",
 				11	:	"Your Payment Money",
-				12	:	"Money Amount Return"
+				12	:	"Your Payment Money",
+				13	:	"Money Amount Returns"
 			}
-			var defaultLangArrToWord = "";
+			var translatedLangArr = defaultLangArr;
+			var cookie = storageManager.getCookie();
             $(function() {
-				if (typeof(navigator.language) != "undefined"){
-					if (navigator.language.split('-')[0] == "zh") {
-						if (typeof(navigator.language.split('-')[1]) != "undefined") {
-							if (navigator.language.split('-')[1].toLowerCase() == "tw" || 
-								navigator.language.split('-')[1].toLowerCase() == "hk") {
-								lang = "zh-tw"
-							}else {
-								lang = "zh-cn"
-							}
-						}
-					}else{
-						lang = navigator.language.split('-')[0];
-					}
-				}
-				else {
-                    lang = "en";
-                }
-				lang = "zh-tw";
+
+				lang=checkLang();
 
                 pageInit();
 
@@ -301,7 +291,65 @@
                 });
             }
 
+			$(".langen").bind("click", function() {
+				lang = "en";
+				storageManager.setCookie({"selectedLang": lang});
+				pageInit();
+				
+			})
+
+			$(".langDefault").bind("click", function() {
+				lang = checkLang();
+				storageManager.setCookie({"selectedLang": lang});
+				pageInit();
+			})
+				
+			function checkLang() {
+				if (typeof(navigator.language) != "undefined"){
+					if (navigator.language.split('-')[0] == "zh") {
+						if (typeof(navigator.language.split('-')[1]) != "undefined") {
+							if (navigator.language.split('-')[1].toLowerCase() == "tw" || 
+								navigator.language.split('-')[1].toLowerCase() == "hk") {
+								var lang = "zh-tw"
+							}else {
+								var lang = "zh-cn"
+							}
+						}
+					}else{
+						var lang = navigator.language.split('-')[0];
+					}
+				}
+				else {
+                    var lang = "en";
+                }
+				//var lang = "en";
+				return lang;
+			}
+
+			function getCookieLang(){
+                if (cookie == "" || cookie == null) {
+                    storageManager.setCookie({"selectedLang": checkLang()});
+                }
+				cookie = storageManager.getCookie();
+				return cookie.selectedLang;
+			}
+			
             function pageInit() {
+				lang = getCookieLang();
+				
+				if(checkLang()=="en"){
+					$(".langDefault").hide();
+					$(".langen").hide();
+				}
+				else if(lang == checkLang()){
+					$(".langDefault").addClass("button-fill");
+					$(".langen").removeClass("button-fill");
+				}else{
+					$(".langen").addClass("button-fill");
+					$(".langDefault").removeClass("button-fill");
+				}
+				
+				var defaultLangArrToWord= "";
 				$.each(defaultLangArr,function(a,b){
 					defaultLangArrToWord += ("{{" + b +"}}");
 				})
@@ -315,19 +363,19 @@
 				//	[[他のアプリ]] [[[お支払いの詳細]]、[[マネー量]]、[[マネー量]]、[[ピープル番号]] [[ピープル番号]] [] [お支払いの詳細] [[チェックアウトマネー]カウント]を] [[個人戻る]]、[[お支払マネー]]、[[お支払マネー] [一人当たりの支払]]、[[マネー額戻ります]]
 					translatedText=translatedText.match(/[^[\{\}]+/gm);
 					//debugger
-					defaultLangArr=[];
+					translatedLangArr=[];
 					$.each(translatedText,function(a,b){
 						if( b != "" && b != " "){
-							defaultLangArr.push(b);
+							translatedLangArr.push(b);
 						}
 					})
 				
 					$(".word").each(function(a,b){
 						if($(this).html()!="" && $(this).html()!="undefined"){
-							$(this).html(defaultLangArr[a]);					
+							$(this).html(translatedLangArr[a]);					
 						}else if($(this).attr("placeholder")!="" && $(this).attr("placeholder")!="undefined"){
 						
-							$(this).attr("placeholder",defaultLangArr[a]);	
+							$(this).attr("placeholder",translatedLangArr[a]);	
 						}
 					})
 				
