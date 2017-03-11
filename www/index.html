@@ -55,7 +55,7 @@
         <!-- Left panel with reveal effect-->
         <div class="panel panel-left panel-reveal">
             <div class="content-block otherApp">
-                <p>Other Apps</p>
+                <p class="word wordOtherApps">Other Apps</p>
             </div>
 
         </div>
@@ -68,7 +68,7 @@
                 <div class="navbar">
                     <div class="navbar-inner">
                         <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                        <div class="center sliding app_title">Checkout Dollor Count</div>
+                        <div class="center sliding app_title word wordCheckoutDollorCount">Checkout Dollor Count</div>
 
                         <div class="right">
 
@@ -89,7 +89,7 @@
                         <!-- Scrollable page content -->
 					
                         <div class="page-content">
-							<div class="content-block-title">Payment Details</div>
+							<div class="content-block-title word wordPaymentDetails">Payment Details</div>
 							<div class="list-block">
 								<ul>
 								<!-- Text inputs -->
@@ -97,21 +97,21 @@
 									  <div class="item-content">
 										<div class="item-media"><i class="icon f7-icons">money_dollar</i></div>
 										<div class="item-inner">
-										  <div class="item-title label">Amount</div>
+										  <div class="item-title label word wordAmount">Amount</div>
 										  <div class="item-input">
-											<input type="number" placeholder="Recept Amount" class="moneyNum">
+											<input type="number" placeholder="Recept Amount" class="moneyNum word wordReceptAmount">
 										  </div> 
 										</div>
 									  </div>
 									</li>
 									<li>
 									  <div class="item-content">
-										<div class="item-media"><i class="icon f7-icons">person</i></div>
+										<div class="item-media"><i class="icon f7-icons">Person</i> </div>
 										<div class="item-inner">
-										  <div class="item-title label">People</div>
+										  <div class="item-title label word wordPeople">People</div>
 										  <div class="item-input">
 											<div class="range-slider">
-												<input type="number" placeholder="Total People" class="personNum">
+												<input type="number" placeholder="Total People" class="personNum word wordTotalPeople">
 											</div>
 										  </div>
 										</div>
@@ -123,7 +123,7 @@
 
 							</div>	
 							
-							<div class="content-block-title">Payment Details</div>
+							<div class="content-block-title word wordPaymentDetails">Payment Details</div>
 							<div class="list-block">
 								<ul>
 									<li class="item-content">
@@ -131,7 +131,7 @@
 											<i class="icon f7-icons">money_dollar</i>
 										</div>
 										<div class="item-inner">
-											<div class="item-title">Dollor Per People</div>
+											<div class="item-title word wordDollorPerPeople">Dollor Per People</div>
 											<div class="item-after dollorPerPeopleResult"></div>
 										</div>
 									</li>
@@ -141,7 +141,7 @@
 
 							</div>	
 							
-							<div class="content-block-title">Personal Return</div>
+							<div class="content-block-title word wordPersonalReturn">Personal Return</div>
 							<div class="list-block">
 								<ul>
 								<!-- Text inputs -->
@@ -149,9 +149,9 @@
 									  <div class="item-content">
 										<div class="item-media"><i class="icon f7-icons">money_dollar</i></div>
 										<div class="item-inner">
-										  <div class="item-title label">Payment Dollor</div>
+										  <div class="item-title label word wordPaymentDollor">Payment Dollor</div>
 										  <div class="item-input">
-											<input type="number" placeholder="Your payment Amount" class="personalpayNum">
+											<input type="number" placeholder="Your Payment Amount" class="personalpayNum word wordYourPaymentAmount">
 										  </div> 
 										</div>
 									  </div>
@@ -162,7 +162,7 @@
 											<i class="icon f7-icons">money_dollar</i>
 										</div>
 										<div class="item-inner">
-											<div class="item-title">Return Dollor</div>
+											<div class="item-title word wordReturnDollor">Return Dollor</div>
 											<div class="item-after personalReturnDollor"></div>
 										</div>
 									  </div>
@@ -196,151 +196,47 @@
         <script type="text/javascript" src="js/my-app.js"></script>
 
         <script>
-            var titleName = {
-                "en": "Today's Fortune",
-                "sc": "今日运程",
-                "tc": "今日運程"
-            }
-            var twelveConstellationsTitle = {
-                "en": "Constellation",
-                "sc": "星座",
-                "tc": "星座"
-            }
-
-            var introductionBtn = {
-                "en": "Constellation introduction",
-                "sc": "星座介绍",
-                "tc": "星座介紹"
-            }
-
-            var twelveConstellationsName = {
-                "en": [
-                    "Capricorn  12/22~1/20",
-                    "Aquarius  1/21~2/18",
-                    "Pisces  2/19~3/20",
-                    "Aries 3/21~4/20",
-                    "Taurus  4/21~5/21",
-                    "Gemini  5/22~6/21",
-                    "Cancer  6/22~7/22",
-                    "Leo 7/23~8/22",
-                    "Virgo  8/23~9/22",
-                    "Libra  9/23~10/23",
-                    "Scorpio  10/24~11/22",
-                    "Sagittarius  11/23~12/21"
-                ],
-                "sc": [
-                    "摩羯座  12/22~1/20",
-                    "水瓶座  1/21~2/18",
-                    "雙魚座  2/19~3/20",
-                    "牡羊座(白羊座) 3/21~4/20",
-                    "金牛座  4/21~5/21",
-                    "雙子座  5/22~6/21",
-                    "巨蟹座  6/22~7/22",
-                    "獅子座 7/23~8/22",
-                    "處女座  8/23~9/22",
-                    "天秤座  9/23~10/23",
-                    "天蠍座  10/24~11/22",
-                    "射手座  11/23~12/21"
-                ],
-                "tc": [
-                    "摩羯座  12/22~1/20",
-                    "水瓶座  1/21~2/18",
-                    "雙魚座  2/19~3/20",
-                    "牡羊座(白羊座) 3/21~4/20",
-                    "金牛座  4/21~5/21",
-                    "雙子座  5/22~6/21",
-                    "巨蟹座  6/22~7/22",
-                    "獅子座 7/23~8/22",
-                    "處女座  8/23~9/22",
-                    "天秤座  9/23~10/23",
-                    "天蠍座  10/24~11/22",
-                    "射手座  11/23~12/21"
-                ]
-            }
-
-            var twelveConstellationsItemName = {
-                "en": [
-                    "Composite Index",
-                    "Love index",
-                    "Job index",
-                    "Wealth index",
-                    "Health index",
-                    "Lucky color",
-                    "Lucky number",
-                    "Match with Q friends",
-                    "Today's overview"
-                ],
-                "sc": [
-                    "综合指数",
-                    "爱情指数",
-                    "工作指数",
-                    "财运指数",
-                    "健康指数",
-                    "幸运颜色",
-                    "幸运数字",
-                    "速配Q友",
-                    "今日概述"
-                ],
-                "tc": [
-                    "綜合指數",
-                    "愛情指數",
-                    "工作指數",
-                    "財運指數",
-                    "健康指數",
-                    "幸運顏色",
-                    "幸運數字",
-                    "速配Q友",
-                    "今日概述"
-                ]
-            }
 
             var lang
+			var	defaultLangArr = {
+				0 	:	"Other Apps",
+				1	:	"Checkout Money Count",
+				2	:	"Payment Details",
+				3	:	"Amounts",
+				4	:	"Amounts",
+				5	:	"People number",
+				6	:	"People number",
+				7	:	"Payment Details",
+				8	:	"Payment Per Person",
+				9	:	"Personal Return",
+				10	:	"Your Payment Money",
+				11	:	"Your Payment Money",
+				12	:	"Money Amount Return"
+			}
+			var defaultLangArrToWord = "";
             $(function() {
-                if (navigator.language.split('-')[0] == "zh") {
-                    if (typeof(navigator.language.split('-')[1]) != "undefined") {
-                        if (navigator.language.split('-')[1].toLowerCase() == "tw") {
-                            lang = "tc"
-                        } else {
-                            if (navigator.language.split('-')[1].toLowerCase() == "hk") {
-                                lang = "tc"
-                            } else {
-                                lang = "sc"
-                            }
-                        }
-                    }
-                } else {
+				if (typeof(navigator.language) != "undefined"){
+					if (navigator.language.split('-')[0] == "zh") {
+						if (typeof(navigator.language.split('-')[1]) != "undefined") {
+							if (navigator.language.split('-')[1].toLowerCase() == "tw" || 
+								navigator.language.split('-')[1].toLowerCase() == "hk") {
+								lang = "zh-tw"
+							}else {
+								lang = "zh-cn"
+							}
+						}
+					}else{
+						lang = navigator.language.split('-')[0];
+					}
+				}
+				else {
                     lang = "en";
                 }
- 
+				lang = "zh-tw";
+
                 pageInit();
 
      
-  
-
-                $(".langen").bind("click", function() {
-                    lang = "en";
-                    $(".langen").addClass("button-fill");
-                    $(".langtc").removeClass("button-fill");
-                    $(".langsc").removeClass("button-fill");
-                    pageInit();
-                })
-
-                $(".langsc").bind("click", function() {
-                    lang = "sc";
-                    $(".langen").removeClass("button-fill");
-                    $(".langtc").removeClass("button-fill");
-                    $(".langsc").addClass("button-fill");
-                    pageInit();
-                })
-
-                $(".langtc").bind("click", function() {
-                    lang = "tc";
-                    $(".langen").removeClass("button-fill");
-                    $(".langtc").addClass("button-fill");
-                    $(".langsc").removeClass("button-fill");
-                    pageInit();
-                })
-
                 $(".otherApp").bind("click", function(e) {
                     e.preventDefault();
                     //alert(1);
@@ -377,6 +273,7 @@
 				})
             })
 
+			
             function translate(keyword, lang, callback) {
                 if (typeof(callback) != "function") {
                     callback = function() {};
@@ -390,15 +287,52 @@
                     },
                     dataType: "json",
                     success: function(response) {
-                        //debugger;
-                        callback(response);
-
+					//debugger;
+						var translatedText = response["data"]["translations"][0]["translatedText"]
+					//	translatedText = translatedText.replace(/“/g,'"');
+						//translatedText = translatedText.replace(/”/g,'"');
+					//	translatedText = translatedText.replace(/：/g,':');
+					//	translatedText = translatedText.replace(/，/g,',');
+					//	translatedText = translatedText.replace(/" "/g,'","');
+						var JsonTranslatedText = translatedText;
+                        callback(JsonTranslatedText);
+						
                     }
                 });
             }
 
             function pageInit() {
-				$(".moneyNum").trigger("change");
+				$.each(defaultLangArr,function(a,b){
+					defaultLangArrToWord += ("{{" + b +"}}");
+				})
+			
+				translate(defaultLangArrToWord,lang,function(translatedText){
+				//debugger;
+					//translatedText = translatedText.replace(/\] \[/g,'][');
+					//translatedText = translatedText.replace(/\[ \[/g,'[[');
+					//translatedText = translatedText.replace(/【/g,'');
+					//translatedText = translatedText.replace(/、/g,'');
+				//	[[他のアプリ]] [[[お支払いの詳細]]、[[マネー量]]、[[マネー量]]、[[ピープル番号]] [[ピープル番号]] [] [お支払いの詳細] [[チェックアウトマネー]カウント]を] [[個人戻る]]、[[お支払マネー]]、[[お支払マネー] [一人当たりの支払]]、[[マネー額戻ります]]
+					translatedText=translatedText.match(/[^[\{\}]+/gm);
+					//debugger
+					defaultLangArr=[];
+					$.each(translatedText,function(a,b){
+						if( b != "" && b != " "){
+							defaultLangArr.push(b);
+						}
+					})
+				
+					$(".word").each(function(a,b){
+						if($(this).html()!="" && $(this).html()!="undefined"){
+							$(this).html(defaultLangArr[a]);					
+						}else if($(this).attr("placeholder")!="" && $(this).attr("placeholder")!="undefined"){
+						
+							$(this).attr("placeholder",defaultLangArr[a]);	
+						}
+					})
+				
+				})
+
             }
 
             myApp.onPageInit('twelveConstellationsDetail', function(page) {
