@@ -57,7 +57,9 @@
             <div class="content-block otherApp">
                 <p class="word wordOtherApps">Other Apps</p>
             </div>
-
+			<div class="content-block shareApp">
+				<p>Share App</p>
+			</div>
         </div>
 
         <!-- Views -->
@@ -110,7 +112,7 @@
 									</li>
 									<li>
 									  <div class="item-content">
-										<div class="item-media"><i class="icon f7-icons">Person</i> </div>
+										<div class="item-media"><i class="icon f7-icons">Person</i></div>
 										<div class="item-inner">
 										  <div class="item-input label word wordPeople">People</div>
 										  <div class="item-input">
@@ -260,6 +262,10 @@
 							$(".personalReturnDollor").html("(Not Enough) - "+dollorReturnResult);
 						}
 					}
+				})
+				
+				$(".shareApp").bind("click",function(e){
+					window.plugins.socialsharing.share("Checkout Dollor Count", "It is Awesome", "", "https://play.google.com/store/apps/details?id=com.skyexplorer.moneycalc");
 				})
             })
 
