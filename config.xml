@@ -69,8 +69,6 @@
 	<plugin name="cordova-plugin-x-toast" />
 	<plugin name="cordova-plugin-x-socialsharing" />
 	<plugin name="cordova-plugin-network-information" />
-	<config-file mode="delete" parent="/manifest" platform="android">
-		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	</config-file>
+	
 	
 </widget>
