@@ -270,32 +270,31 @@
             })
 
 			
-            function translate(keyword, lang, callback) {
-                if (typeof(callback) != "function") {
-                    callback = function() {};
-                }
-                $.ajax({
-                    type: "post",
-                    url: "http://gogogo.synology.me/googletranslate/translate.php",
-                    data: {
-                        "keyword": keyword,
-                        "lang": lang
-                    },
-                    dataType: "json",
-                    success: function(response) {
-					//debugger;
-						var translatedText = response["data"]["translations"][0]["translatedText"]
-					//	translatedText = translatedText.replace(/“/g,'"');
-						//translatedText = translatedText.replace(/”/g,'"');
-					//	translatedText = translatedText.replace(/：/g,':');
-					//	translatedText = translatedText.replace(/，/g,',');
-					//	translatedText = translatedText.replace(/" "/g,'","');
-						var JsonTranslatedText = translatedText;
-                        callback(JsonTranslatedText);
-						
-                    }
-                });
-            }
+function translate(keyword, lang, callback) {
+    if (typeof(callback) != "function") {
+        callback = function() {};
+    }
+    $.ajax({
+        type: "post",
+        url: "http://gogogo.synology.me/googletranslate/translateArr.php",
+        data: {
+            "keyword": keyword,
+            "lang": lang
+        },
+        dataType: "json",
+        success: function(response) {
+            //  debugger;
+            var translatedText = response["data"]["translations"][0]["translatedText"]
+            var JsonTranslatedText = translatedText;
+            callback(JsonTranslatedText);
+        },
+        error: function(response) {
+            var translatedText = keyword;
+            var JsonTranslatedText = translatedText;
+            callback(JsonTranslatedText);
+        }
+    });
+}
 
 			$(".langen").bind("click", function() {
 				lang = "en";
@@ -357,7 +356,7 @@
 				
 				var defaultLangArrToWord= "";
 				$.each(defaultLangArr,function(a,b){
-					defaultLangArrToWord += ("{{" + b +"}}");
+					 defaultLangArrToWord += ("" + b + "✰");
 				})
 			
 				translate(defaultLangArrToWord,lang,function(translatedText){
@@ -367,7 +366,7 @@
 					//translatedText = translatedText.replace(/【/g,'');
 					//translatedText = translatedText.replace(/、/g,'');
 				//	[[他のアプリ]] [[[お支払いの詳細]]、[[マネー量]]、[[マネー量]]、[[ピープル番号]] [[ピープル番号]] [] [お支払いの詳細] [[チェックアウトマネー]カウント]を] [[個人戻る]]、[[お支払マネー]]、[[お支払マネー] [一人当たりの支払]]、[[マネー額戻ります]]
-					translatedText=translatedText.match(/[^[\{\}]+/gm);
+					translatedText = translatedText.match(/[^[\✰]+/gm);
 					//debugger
 					translatedLangArr=[];
 					$.each(translatedText,function(a,b){
